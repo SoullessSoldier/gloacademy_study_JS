@@ -8,40 +8,58 @@ const checkCancel = function(prompt){
         alert(msg);
         return false;
     }else{
-        return prompt;
+        return true;
     }
 }
 function Ugadayka(){
     let magicNumber, userNumber, msg;
+    let numAttempts = 10;
+  
+    magicNumber = Math.floor(Math.random() * 100) + 1;
     
-    do{
-        magicNumber = +prompt('Загадайте число от 1 до 100?');            
-    }
-    while(!isNumber(magicNumber) || magicNumber < 1 || magicNumber > 100);
-
     function guessNumber(n){
-        //console.log(n, typeof(n));
-        if(n === null){
-            msg = 'Игра окончена.';
-            alert(msg);
-        } else if (!isNumber(n) || n === 0){
-            msg = 'Введи число!';
-            userNumber = prompt(msg);
-            if(checkCancel(userNumber)) guessNumber(+userNumber);
-        } else if (n > magicNumber){
-            msg = 'Загаданное число больше.\nВведите новый вариант';
-            userNumber = prompt(msg);
-            if(checkCancel(userNumber)) guessNumber(+userNumber);
-        } else if (n < magicNumber){
-            msg = 'Загаданное число меньше.\nВведите новый вариант';
-            userNumber = prompt(msg);
-            if(checkCancel(userNumber)) guessNumber(+userNumber);
-        } else if (n === magicNumber){
-            msg = 'Поздравляю, Вы угадали!!!';
-            alert(msg);
+        console.log(n, typeof n)
+        if(numAttempts === 0){
+            msg='Попытки закончились, хотите сыграть еще?';
+            if(confirm(msg)){
+                Ugadayka();
+            }else{
+                msg = 'Игра окончена.';
+                alert(msg);
+            };
+        }else{
+            if(n === null){
+                msg = 'Игра окончена.';
+                alert(msg);
+            } else if ((!isNumber(n)) || (n === 0)){
+                msg = `Введи число!\nОсталось попыток ${numAttempts}.`;
+                numAttempts--;
+                userNumber = prompt(msg);
+                if(checkCancel(userNumber)) guessNumber(+userNumber);
+            } else if (n > magicNumber){
+                msg = `Загаданное число меньше.\nОсталось попыток ${numAttempts}.\nВведите новый вариант`;
+                numAttempts--;
+                userNumber = prompt(msg);
+                if(checkCancel(userNumber)) guessNumber(+userNumber);
+            } else if (n < magicNumber){
+                msg = `Загаданное число больше.\nОсталось попыток ${numAttempts}.\nВведите новый вариант`;
+                numAttempts--;
+                userNumber = prompt(msg);
+                if(checkCancel(userNumber)) guessNumber(+userNumber);
+            } else if (n === magicNumber){
+                msg = 'Поздравляю, Вы угадали!!!\nХотели бы сыграть еще?';
+                if(confirm(msg)){
+                    Ugadayka();
+                }else{
+                    msg = 'Игра окончена.';
+                    alert(msg);
+                };
+            }
         }
+        
     }
-    userNumber = prompt('Угадай число от 1 до 100?');
+    userNumber = prompt(`Угадай число от 1 до 100?\nОсталось попыток ${numAttempts}.`);
+    numAttempts--;
     //console.log('userNumber: ', userNumber);
     if(userNumber === null){
         msg = 'Игра окончена.';
@@ -49,11 +67,7 @@ function Ugadayka(){
         
     } else {
         guessNumber(+userNumber);
-
+        
     }            
 }
 Ugadayka();  
-    
-    
-
-    
