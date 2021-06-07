@@ -36,6 +36,7 @@ let appData ={
             while(!isNumber(expValue));
             this.expenses[expName] = +expValue;
         }
+    
     },
     getExpensesMonth: function (){
         let sum = 0;
@@ -103,7 +104,7 @@ let amount2 = prompt('Во сколько это обойдется в меся�
 //let expenses = [];
 //дet expensesAmount = appData.getExpensesMonth();
 //let accumulatedMonth = appData.getBudget();
-
+appData.getExpensesMonth();
 appData.getBudget();//костыль, иначе бюджеты не посчитаются
 console.log(appData.getTargetMonth());
 
