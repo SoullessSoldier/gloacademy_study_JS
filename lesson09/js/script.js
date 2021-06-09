@@ -1,15 +1,40 @@
+'use strict';
+const btnStart = document.getElementById('start');
+const btnIncomeAdd = document.querySelector('.btn_plus.income_add');
+const btnExpensesAdd = document.querySelector('.btn_plus.expenses_add');
+const checkboxDeposit = document.querySelector('.deposit-checkmark');
+const additionalIncomeItems = document.querySelectorAll('.additional_income-item');
+
+const valueBudgetMonth = document.getElementsByClassName('budget_month-value')[0];
+const valueBudgetDay = document.getElementsByClassName('budget_day-value')[0];
+const valueExpensesMonth = document.getElementsByClassName('expenses_month-value')[0];
+const valueAdditionalIncome = document.getElementsByClassName('additional_income-value')[0];
+const valueAdditionalExpenses = document.getElementsByClassName('additional_expenses-value')[0];
+const valueIncomePeriod = document.getElementsByClassName('income_period-value')[0];
+const valueTargetMonth = document.getElementsByClassName('target_month-value')[0];
+
+const inputSalaryAmount = document.querySelector('.salary-amount');
+const inputIncomeTitle = document.querySelector('.income-title');
+const inputIncomeAmount = document.querySelector('.income-amount');
+const inputExpensesTitle = document.querySelector('.expenses-title');
+const inputExpensesAmount = document.querySelector('.expenses-amount');
+const inputAdditionalExpenses = document.querySelector('.additional_expenses-item');
+const inputTargetAmount = document.querySelector('.target-amount');
+const inputPeriodSelect = document.querySelector('.period-select');
+
+
 let isNumber = function(n){
     return !isNaN(parseFloat(n)) && isFinite(n);
 };
 
 let isAlphaNumeric = function(s){
     //debugger;
-    return s.match(/^[\p{L}\p{N}, ]+/gmu) != null;
-}
+    return s.match('/^[\p{L}\p{N}, ]+/gmu') !== null;
+};
 let isAlpha = function(s){
     //debugger;
-    return s.match(/^[\p{L}, ]+/gmu) != null;
-}
+    return s.match('/^[\p{L}, ]+/gmu') !== null;
+};
 
 let money = 150000, 
     start = function(){
@@ -17,6 +42,7 @@ let money = 150000,
             money = +prompt('Ваш месячный доход?');
         }
         while(!isNumber(money));
+        //while(isNaN(money) || money === '' || money === null)
     };
 start();
 
@@ -67,7 +93,9 @@ let appData ={
     getExpensesMonth: function (){
         let sum = 0;
         
-        for (let key in this.expenses) sum += this.expenses[key];
+        for (let key in this.expenses) {
+            sum += this.expenses[key];
+        }
         this.expensesMonth = sum;
         return this.expensesMonth;
     },
@@ -82,8 +110,7 @@ let appData ={
         if (getTarget < 0) {
             result = 'Цель не будет достигнута';
         } else {
-            result = 'Цель будет достигнута за '
-            + getTarget + ' месяцев';
+            result = 'Цель будет достигнута за ' + getTarget + ' месяцев';
         }
         return result;
     },
@@ -125,7 +152,9 @@ let appData ={
         res = res.trim().slice(0,-1);
         return res;
         /*
-        const array_of_strings = ['css','html','xhtml','html5','css3','javascript','jquery','lesscss','arrays','wordpress','facebook','fbml','table','.htaccess','php','c','.net','c#','java']
+        const array_of_strings = ['css','html','xhtml','html5','css3',
+        'javascript','jquery','lesscss','arrays','wordpress',
+        'facebook','fbml','table','.htaccess','php','c','.net','c#','java']
         const separator = ', '
         const result = array_of_strings.reduce((accumulator, currentValue) => accumulator + separator + currentValue);
         console.log(result)
