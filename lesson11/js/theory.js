@@ -66,5 +66,7 @@
  *      event.preventDefault();
  *  });
  * 
- *  28:51
+ *  у event есть target и currentTarget
+ *  Всплытие и захват событий
+ *  Делегирование (в будущем)
  */
