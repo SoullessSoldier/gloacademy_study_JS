@@ -88,7 +88,11 @@ one();
  *  let foo = newTest.bind(obj);
  *  foo();
  *  
- *  4) Привязка new (в след. уроке)
+ *  4) Привязка new (в след. уроке) в конструкторе
+ *  function Car(){
+       this.model = 'Mazda';
+    }
+    let car1 = new Car();//this относится к car1
  *   
 */
 
