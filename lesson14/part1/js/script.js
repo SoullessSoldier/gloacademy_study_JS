@@ -33,7 +33,11 @@ DomElement.prototype.createElement = function(text){
     document.body.appendChild(el);
         
 };
-//Call as {selector: <'.container' or '#article'>, height: <height>, width: <width>, bg: <bgcolor>, fontSize: <fontSize>}
+/**
+ * Call as {selector: <'.container' or '#article'>,
+ * height: <height>, width: <width>,
+ * bg: <bgcolor>, fontSize: <fontSize>}
+ * */  
 let elem1 = new DomElement({selector:'.block1', height: '100px', width: '200px', bg: 'red', fontSize: '24px'});
 elem1.createElement('Hello, world!');
 let elem2 = new DomElement({selector:'.description', bg: 'yellow', fontSize: '36px'});
