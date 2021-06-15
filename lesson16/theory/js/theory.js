@@ -163,3 +163,132 @@ const currTrans = {
 };
 console.log('currTrans: ', currTrans);
 
+/**
+ * Коллекции Map и Set
+ * 
+ * раньше мы хранили данные только в объектах и массивах
+ * минусы:
+ * 1) Массивы и объекты наследуют методы родителей
+ * 2) объекты могут содержать ключи только в виде строки
+ * 3) при переборе объекта порядок перебора может различаться
+ * 4) у объекта нет метода length (только через Object.keys(obj).length)
+ * 
+ * коллекция Map решает эти вопрос, хранит пары ключ-значение, 
+ *   ключом может быть любое произвольное значение,
+ *  пары хранятся в том порядке, как они были  записаны 
+ */
+const obj = {
+    a: 5,
+    b: 10
+}
+
+const map = new Map();
+map.set('car', {brand: 'mazda', model: '3'})
+    .set(777, 'три топора')//ключ - число
+    .set(null, 'даже так')
+    .set(NaN, 'Wow')
+    .set(undefined, 'What else')
+    .set(obj, 123);
+
+const func = () => {
+    console.log('Hello, world!');
+};
+map.set(func, 'Hmmmm')
+    .set(false, true);
+
+console.log('map: ', map);
+//получение значения по ключу
+console.log(map.get(undefined));
+//Проверка наличия ключа
+console.log(map.has(false));
+//map.size
+console.log(map.size);
+
+//передача значений в конструктор в виде массива
+const map1 = new Map([
+    [2019, 'New year'],
+    [2020, 'Happy christmas']
+]);
+//метод delete
+map1.delete(2019);
+//метод clear - удаляет все элементы
+
+//Map - итерируемый объект
+const arrr = Array.from(map);
+map.forEach((value, key) => {
+    console.log(`через forEach ключ: ${key}, значение ${value}`);
+});
+for (let [key, value] of map){
+    console.log(`через for..of ключ: ${key}, значение ${value}`);
+};
+/**
+ * когда использовать map?
+ * 1) если ключи это не только строки
+ * 2) если ключи генерируются динамически
+ * 3) если выполняется много действий с парами ключ-значение 
+ *   (добавлять, удалять)
+ * 4) если необходимо перебирать ключ-значение
+ * 
+ * */
+
+/**
+ * Коллекция Set - нужна для хранения уникальных значений
+ * 
+ */
+const carss = new Set();
+
+carss.add('mazda');
+carss.add('kia');
+carss.add('bmw');
+carss.add('volvo');
+carss.add(NaN);
+carss.add(null);
+carss.add('mazda'); //дублированные элементы не добавляются
+
+console.log(carss);
+console.log(carss.size);//это геттер!
+
+//наличие элемента в коллекции
+console.log(carss.has('volvo'));
+
+//удаление элемента в коллекции
+console.log(carss.delete('volvo'));
+console.log(carss.has('volvo'));
+
+//удаление всех элементов
+//console.log(carss.clear());
+
+const carss1 = new Set(['mazda', 'bmw', 'volvo', 5, NaN]);
+//Коллекция Set также итерируемая
+
+const [carr1, carr2] = carss1;
+console.log('carr1: ', carr1);
+console.log('carr2: ', carr2);
+
+//с помощью spread-оператора превратим коллекцию в массив
+console.log([...carss1]); 
+
+//объединение коллекций
+const allCars = new Set([...carss, ...carss1]);
+console.log('allCars: ', allCars);
+
+/**
+ * применение Set - если надо часто проверять, 
+ *  имеются ли элементы в коллекции или нет, 
+ * т.к. перебор массивов - это циклы, а циклы ресурсозатратны
+*/
+
+/**
+ * 
+ *  еще есть WeakMap и WeakSet
+ * Если мы работаем с объектом, который «принадлежит» другому коду, 
+ * может быть даже сторонней библиотеке, и хотим сохранить у себя 
+ * какие-то данные для него, которые должны существовать лишь пока 
+ * существует этот объект, то WeakMap – как раз то, что нужно.
+ * у WeakMap в качестве ключей могут храниться только объекты, а 
+ * у WeakSet в качестве значений могут храниться только объекты
+ * они неитерируемы
+ * 
+*/
+
+
