@@ -1,15 +1,20 @@
 'use strict';
 window.addEventListener('DOMContentLoaded', () => {
+    const greetingText = document.querySelector('.greeting-text');
+    const weekdayText = document.querySelector('.weekday-text');
+    const timerText = document.querySelector('.timer-text');
+    const newyearText = document.querySelector('.newyear-text');
+
     const countTimer = () =>{
         let today = new Date();
         
         
         const sayGreeting = (today) => {
             let hours = today.getHours();
-            return (hours >= 6 && hours < 12 ) ? 'Доброе утро' :
-                   (hours >= 12 && hours < 18 ) ? 'Добрый день' :
-                   (hours >= 18 && hours < 24 ) ? 'Добрый вечер' :
-                   'Доброй ночи';
+            return (hours >= 6 && hours < 12 ) ? 'Доброе утро!' :
+                   (hours >= 12 && hours < 18 ) ? 'Добрый день!' :
+                   (hours >= 18 && hours < 24 ) ? 'Добрый вечер!' :
+                   'Доброй ночи!';
         }
         const getDayOfWeek = (today) => {
             let week = [
@@ -38,12 +43,13 @@ window.addEventListener('DOMContentLoaded', () => {
             let newYearDate = new Date(newYear+1, 0, 1);
             let res = Math.floor((newYearDate - date1) / (1000 * 60 * 60 * 24));
             let days = timeWords(res, ['день', 'дня', 'дней']);
-            return `До Нового ${newYear} года осталось: ${res} ${days}`; 
+            return `До Нового ${newYear+1} года осталось: ${res} ${days}`; 
         }
-        console.log(sayGreeting(today));
-        console.log(getDayOfWeek(today));
-        console.log(getCurrentTime(today));
-        console.log(getDiffNewYear(today));
+        greetingText.textContent = sayGreeting(today);
+        weekdayText.textContent = getDayOfWeek(today);
+        timerText.textContent = getCurrentTime(today);
+        newyearText.textContent = getDiffNewYear(today);
     };
     countTimer();
+    setInterval(countTimer, 1000);
 });
