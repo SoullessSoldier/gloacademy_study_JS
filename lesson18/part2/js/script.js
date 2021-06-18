@@ -57,7 +57,7 @@ window.addEventListener('DOMContentLoaded', () => {
     
     
     
-    const togglePopUp = () => {
+    const togglePopUp= () => {
         const popup = document.querySelector('.popup'),
               popupContent = document.querySelector('.popup-content'),
               popupBtn =  document.querySelectorAll('.popup-btn'),
@@ -121,8 +121,24 @@ window.addEventListener('DOMContentLoaded', () => {
     };
 
     togglePopUp();
-    
-    
 
+    // smooth scroll
+    const smoothScrollToService = () => {
+        
+        const elementScrollFrom = document.querySelector('[href="#service-block"]');
+        let atrribute = elementScrollFrom.getAttribute('href').slice(1,);
+
+        let elementScrollTo = document.getElementById(`${atrribute}`);
+        
+        elementScrollFrom.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({
+                top: elementScrollTo.offsetTop,
+                behavior: "smooth"
+            });
+        }); 
+    };
+    smoothScrollToService();
+    
     countTimer('01 july 2021 23:33:00');
 });
