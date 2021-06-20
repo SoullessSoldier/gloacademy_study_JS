@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson19 - task1</title>
+    <style>
+        input{
+        display: block;
+        margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <a href="https://codepen.io/soullesssoldier/pen/LYWvOYJ">Codepen https://codepen.io/soullesssoldier/pen/LYWvOYJ</a>
+    <div class="container">
+        <input type="text" id='a'>
+<input type="text" id='b'>
+<button id="sum">сумма</button>
+<button id="mult">произведение</button>
+<input type="text" id='res'>
+<div class="task">
+  Решить задачу где возможно используй <b>this</b><br>
+  В объект можно добавлять свои свойства<br>
+  Есть объект calculator с тремя методами:
+  <ul>
+    <li>sum() возвращает сумму этих двух значений</li>
+    <li>mult() возвращает произведение этих двух значений</li>
+    <li>show() выводит результат вычислений в инпут ".res" объекта</li>
+  </ul>
+</div>
+
+<h3>Форкните доску чтобы её сохранить у себя на доске</h3>
+<h4>Для этого предварительно надо зарегистрироваться на codepen</h4>
+<img border="1" src="http://dl4.joxi.net/drive/2020/04/17/0032/1298/2123026/26/fe01b568c8.jpg" alt="">
+    </div>
+    <script>
+        const calculator = {
+            sum: function(){
+                this.result = +this.a + +this.b;
+            },
+            mult: function(){
+                this.result = +this.a * +this.b;
+            },
+            show: function(){
+                res.value  = this.result;
+            },
+            a: '',
+            b: '',
+            res: '',
+            result: 0,
+            init: function(){
+                this.a = document.getElementById('a').value;
+                this.b = document.getElementById('b').value;
+                this.res = document.getElementById('res');
+                //this.res.value = '';
+                
+            }
+            
+            }
+            const btnSum = document.getElementById('sum');
+            const btnMult = document.getElementById('mult');
+            btnSum.addEventListener('click', ()=> {
+            //let calc = calculator();
+            calculator.init();
+            calculator.sum();
+            calculator.show();
+            });
+            btnMult.addEventListener('click', ()=> {
+            //let calc = calculator();
+            calculator.init();
+            calculator.mult();
+            calculator.show();
+            });
+    </script>
+</body>
+</html>
