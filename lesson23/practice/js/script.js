@@ -280,5 +280,90 @@ window.addEventListener('DOMContentLoaded', () => {
 
     slider();
 
+    //change photo on mouse move
+    const replacePhoto = () => {
+        let tempImgSrc;
+        const teamPhotoItems = document.querySelectorAll('.command__photo');
+        teamPhotoItems.forEach(item => {
+            item.addEventListener('mouseover', (event)=>{
+                tempImgSrc = item.src;
+                event.target.src = item.dataset.img;
+            });
+        });
+        teamPhotoItems.forEach(item => {
+            item.addEventListener('mouseout', (event)=>{
+                event.target.src = tempImgSrc;
+            });
+        });
+        
+    };
+
+    replacePhoto();
+
+    //calculator -> validate digits input
+    const validateCalcInput = () => {
+        const calcInputItems = document.querySelectorAll('.calc-item');
+        const validateInputDigits = (element) => {
+                element.value = element.value.replace(/\D/g,'');
+            };
+            calcInputItems.forEach(item=>{
+                item.addEventListener('input', event=>validateInputDigits(event.target));
+        });
+    };
+        
+    //};
+
+    validateCalcInput();
+    
+    //validateUserForm
+    const validateUserForm = () =>{
+        const formUserName = document.getElementById('form2-name');
+        const formMessage = document.getElementById('form2-message');
+        const formEmail = document.getElementById('form2-email');
+        const formPhone = document.getElementById('form2-phone');
+
+        const validateCyrillic = (element) => {
+            element.value = element.value.replace(/[^а-яё\- ]/gi,'');
+        };
+        const validateEmail = (element) => {
+            element.value = element.value.replace(/[^a-z\@\-\_\.\!\~\*\']/gi,'');
+        };
+        const validatePhone = (element) => {
+            element.value = element.value.replace(/[^\d\(\)\-]/g,'');
+        };
+
+        const validateOnBlur = (element) => {
+            element.value = element.value.replace(/[ \-]{2,}/g,' ');
+            element.value = element.value.replace(/[\-]{2,}/g,'-');
+            element.value = element.value.replace(/^[ \-]/g,'');
+            element.value = element.value.replace(/[ \-]$/g,'');
+        };
+
+        const capitalizeFirst = (element) => {
+            element.value = element.value.toLowerCase().replace(/\S{2,}/g, (match) =>
+                match.replace(/\S/, (m) => m.toUpperCase()));
+        };
+
+        [formUserName, formMessage].forEach(item => {
+            item.addEventListener('input', event=>validateCyrillic(event.target));
+        });
+        
+        formEmail.addEventListener('input', event=>validateEmail(event.target));
+        
+        formPhone.addEventListener('input', event=>validatePhone(event.target));
+        
+        [formUserName, formMessage, formEmail, formPhone].forEach(item => {
+            item.addEventListener('blur', event=>validateOnBlur(event.target));
+        });
+
+        formUserName.addEventListener('blur', event=>capitalizeFirst(event.target));
+        
+
+    };
+
+    validateUserForm();
+
+
+
     countTimer('01 july 2021 23:33:00');
 });
