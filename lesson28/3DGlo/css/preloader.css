@@ -1,0 +1,50 @@
+section {
+    flex: 1 1 25%;
+  }
+  .preloader-block{
+    min-height: 2vh;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-content: space-around;
+  }
+  .sk-three-bounce {
+    width: 8em;
+    margin: auto;
+    text-align: center;
+  }
+  .sk-three-bounce .sk-child {
+    width: 1.2em;
+    height: 1.2em;
+    background-color: #337ab7;
+    border-radius: 100%;
+    display: inline-block;
+    -webkit-animation: sk-three-bounce 1.4s ease-in-out 0s infinite both;
+            animation: sk-three-bounce 1.4s ease-in-out 0s infinite both;
+  }
+  .sk-three-bounce .sk-bounce-1 {
+    -webkit-animation-delay: -0.32s;
+            animation-delay: -0.32s;
+  }
+  .sk-three-bounce .sk-bounce-2 {
+    -webkit-animation-delay: -0.16s;
+            animation-delay: -0.16s;
+  }
+  
+  @-webkit-keyframes sk-three-bounce {
+    0%, 80%, 100% {
+      transform: scale(0);
+    }
+    40% {
+      transform: scale(1);
+    }
+  }
+  
+  @keyframes sk-three-bounce {
+    0%, 80%, 100% {
+      transform: scale(0);
+    }
+    40% {
+      transform: scale(1);
+    }
+  }
