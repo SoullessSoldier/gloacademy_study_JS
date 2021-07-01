@@ -1,0 +1,1 @@
+(()=>{var e={103:(e,o,r)=>{r(841),e.exports=function(){console.log("hello")}},841:e=>{e.exports=()=>{setInterval((()=>{document.body.innerHTML=Date()}),1e3)}}},o={};function r(t){var n=o[t];if(void 0!==n)return n.exports;var s=o[t]={exports:{}};return e[t](s,s.exports,r),s.exports}(()=>{const e=r(103),o=r(841);e(),o()})()})();
