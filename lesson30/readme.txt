@@ -10,6 +10,13 @@
 Сборщик Webpack 14:14
 Современный синтаксис import/export 21:18
 
+https://webpack.js.org/loaders/babel-loader/
+
+npm install -D babel-loader @babel/core @babel/preset-env
+
+webPack dev server
+npm install webpack-dev-server -D
+
 Полезные ссылки
 
 Модули ES6
