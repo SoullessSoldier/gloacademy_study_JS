@@ -1,8 +1,8 @@
-function countTimer(deadline){
-    let timerHours = document.getElementById('timer-hours'),
+const countTimer = (deadline) => {
+    const timerHours = document.getElementById('timer-hours'),
         timerMinutes = document.getElementById('timer-minutes'),
         timerSeconds = document.getElementById('timer-seconds');
-    function getTimeRemaining(){
+    const getTimeRemaining = () => {
         let dateStop = new Date(deadline).getTime(),//milliseconds
             dateNow = new Date().getTime(),//milliseconds
             timeRemaining = (dateStop - dateNow)/1000,
@@ -12,8 +12,8 @@ function countTimer(deadline){
             days = Math.floor(timeRemaining/(60*60*24));
                     
         return {timeRemaining, hours, minutes, seconds};
-    }
-    function updateClock(){
+    };
+    const updateClock = () => {
         let timer = getTimeRemaining();
         
         if(Math.floor(timer.timeRemaining) >= 0 ){
@@ -22,7 +22,7 @@ function countTimer(deadline){
             timerSeconds.textContent = timer.seconds.toString().padStart(2,'0');
             setTimeout(updateClock, 1000);
         }
-    }
+    };
     updateClock();
     
 };

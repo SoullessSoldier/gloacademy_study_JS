@@ -11,23 +11,23 @@ const calculator = (price = 100) => {
         let countValue = 1,
             dayValue = 1;
         
-        function animateValue(obj, start, end, duration) {
+        const animateValue = (obj, start, end, duration) => {
             let startTimestamp = null;
             const step = (timestamp) => {
                 if (!startTimestamp) startTimestamp = timestamp;
-                    const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-                    obj.innerHTML = Math.floor(progress * (end - start) + start);
-                    if (progress < 1) {
-                        window.requestAnimationFrame(step);
-                    }
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                obj.innerHTML = Math.floor(progress * (end - start) + start);
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                }
             };
             window.requestAnimationFrame(step);
-        }
+        };
               
         
 
         const typeValue = calcType.options[calcType.selectedIndex].value/10;
-        //console.log('typeValue: ', typeValue);
+        
         
         const squareValue = +calcSquare.value;
         if (calcCount.value > 1) {
@@ -51,19 +51,14 @@ const calculator = (price = 100) => {
             total = 0;
         }
 
-        //const obj = document.getElementById("value");
+        
         animateValue(totalValue, 0, total, 500);
-        //totalValue.textContent = total;
+        
     };
 
     calcBlock.addEventListener('change', (event) => {
         const target = event.target;
-        /*if (target.matches('.calc-type') || target.matches('.calc-square') || 
-            target.matches('.calc-count') || target.matches('.calc-day')){
-        }*/
-        /*if(target === calcType || target === calcSquare ||
-            target === calcDay || target === calcCount){
-        }*/
+        
             
         if (target.matches('select') || target.matches('input')){
             countSum();

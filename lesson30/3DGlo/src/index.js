@@ -13,7 +13,7 @@ import validateCalcInput from './modules/validateCalcInput';
 import validateUserForm from './modules/validateUserForm';
 
 //таймер
-countTimer('01 july 2021 23:33:00');
+countTimer('16 jul 2021 23:59:59');
     
 //toggleMenu
 toggleMenu();

@@ -1,11 +1,14 @@
 const validateUserForm = () =>{
-    const form2UserName = document.getElementById('form2-name');
-    const form2Message = document.getElementById('form2-message');
-    const form2Email = document.getElementById('form2-email');
-    const form2Phone = document.getElementById('form2-phone');
-    const form1UserName = document.getElementById('form1-name');
-    const form1Email = document.getElementById('form1-email');
-    const form1Phone = document.getElementById('form1-phone');
+    const form2UserName = document.getElementById('form2-name'),
+        form2Message = document.getElementById('form2-message'),
+        form2Email = document.getElementById('form2-email'),
+        form2Phone = document.getElementById('form2-phone'),
+        form1UserName = document.getElementById('form1-name'),
+        form1Email = document.getElementById('form1-email'),
+        form1Phone = document.getElementById('form1-phone'),
+        form3UserName = document.getElementById('form3-name'),
+        form3Email = document.getElementById('form3-email'),
+        form3Phone = document.getElementById('form3-phone');
 
     const validateCyrillic = (element) => {
         element.value = element.value.replace(/[^а-яё ]/gi,'');
@@ -14,7 +17,7 @@ const validateUserForm = () =>{
         element.value = element.value.replace(/[^?!,.а-яё\d ]/gi,'');
     };
     const validateEmail = (element) => {
-        element.value = element.value.replace(/[^a-z\@\-\_\.\!\~\*\']/gi,'');
+        element.value = element.value.replace(/[^a-z\d\@\-\_\.\!\~\*\']/gi,'');
     };
     const validatePhone = (element) => {
         element.value = element.value.replace(/[^\d\(\)\-]/g,'');
@@ -32,27 +35,34 @@ const validateUserForm = () =>{
             match.replace(/\S/, (m) => m.toUpperCase()));
     };
 
-    [form2UserName, form1UserName].forEach(item => {
+    const arrUserNames = [form1UserName, form2UserName, form3UserName],
+        arrUserEmails = [form1Email, form2Email, form3Email],
+        arrUserPhones = [form1Phone, form2Phone, form3Phone];
+    
+    const arrAllInputs = arrUserNames.concat(arrUserEmails);
+
+    arrUserNames.forEach(item => {
         item.addEventListener('input', event=>validateCyrillic(event.target));
     });
     
     form2Message.addEventListener('input', event=>validateCyrillicDigitsPunctuations(event.target));
     
     
-    [form1Email, form2Email].forEach(item => {
+    arrUserEmails.forEach(item => {
         item.addEventListener('input', event=>validateEmail(event.target));
     });
     
-    [form1Phone, form2Phone].forEach(item => {
+    arrUserPhones.forEach(item => {
         item.addEventListener('input', event=>validatePhone(event.target));
     });
     
-    [form1UserName, form1Email, form1Phone, form2UserName, form2Message, form2Email, form2Phone].forEach(item => {
+    arrAllInputs.forEach(item => {
         item.addEventListener('blur', event=>validateOnBlur(event.target));
     });
 
-    form2UserName.addEventListener('blur', event=>capitalizeFirst(event.target));
-    
+    arrUserNames.forEach(item => {
+        item.addEventListener('blur', event=>capitalizeFirst(event.target));
+    });
 
 };
 
