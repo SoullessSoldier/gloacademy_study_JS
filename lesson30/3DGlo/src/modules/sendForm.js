@@ -38,6 +38,7 @@ const sendForm = () => {
                 
                 postData(body)
                     .then(response => {
+                        if(!response.ok) throw new Error('Error:', response.status, ' with status text:', response.statusText);
                         if (item === form3) statusMessage.style.cssText = 'font-size: 2rem; color: #fff';
                         statusMessage.textContent = successMessage;
                         
@@ -57,100 +58,7 @@ const sendForm = () => {
             
         });
     });
-    /*   
-    form1.addEventListener('submit', (event) => {
-        event.preventDefault();
-        form1.appendChild(statusMessage);
-        
-        if (checkIfEmpty(form1)) {
-            statusMessage.innerHTML = preloadMessage;
-
-            const formData = new FormData(form1);
-            let body = {};
-
-            formData.forEach((val, key) => {
-                body[key] = val;
-            });
-            
-            postData(body)
-                .then(response => {
-                    statusMessage.textContent = successMessage;
-                    
-                })
-                .catch(errorMsg => {
-                    statusMessage.textContent = errorMessage;
-                    console.error(errorMsg);
-                })
-                .finally(()=>{
-                    [...form1.elements].forEach(item=>{
-                        if(item.tagName.toLowerCase() === 'input') item.value = '';
-                    });
-                });
-        }
-
-        
-    });
-
-    form2.addEventListener('submit', (event) => {
-        event.preventDefault();
-        form2.appendChild(statusMessage);
-        
-        statusMessage.innerHTML = preloadMessage;
-
-        const formData = new FormData(form2);
-        let body = {};
-
-        formData.forEach((val, key) => {
-            body[key] = val;
-        });
-        postData(body)
-            .then(response => {
-                statusMessage.textContent = successMessage;
-                
-            })
-            .catch(errorMsg => {
-                statusMessage.textContent = errorMessage;
-                console.error(errorMsg);
-            })
-            .finally(()=>{
-                [...form2.elements].forEach(item=>{
-                    if(item.tagName.toLowerCase() === 'input') item.value = '';
-                });
-            });
-        
-        
-    });
-
-    form3.addEventListener('submit', (event) => {
-        event.preventDefault();
-        form3.appendChild(statusMessage);
-        
-        statusMessage.innerHTML = preloadMessage;
-
-        const formData = new FormData(form3);
-        let body = {};
-
-        formData.forEach((val, key) => {
-            body[key] = val;
-        });
-        postData(body)
-            .then(response => {
-                statusMessage.textContent = successMessage;
-                
-            })
-            .catch(errorMsg => {
-                statusMessage.textContent = errorMessage;
-                console.error(errorMsg);
-            })
-            .finally(()=>{
-                [...form3.elements].forEach(item=>{
-                    if(item.tagName.toLowerCase() === 'input') item.value = '';
-                });
-            });
-        
-        
-    });
-    */
+    
     const checkIfNotEmpty = (form) => {
         let flag = true;
         [...form.elements].forEach(item=>{

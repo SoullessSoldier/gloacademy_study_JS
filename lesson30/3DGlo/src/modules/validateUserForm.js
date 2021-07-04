@@ -17,7 +17,7 @@ const validateUserForm = () =>{
         element.value = element.value.replace(/[^?!,.а-яё\d ]/gi,'');
     };
     const validateEmail = (element) => {
-        element.value = element.value.replace(/[^a-z\d\@\-\_\.\!\~\*\']/gi,'');
+        element.value = element.value.replace(/[^a-z\d\@\-\_\.\!\~\*\+\']/gi,'');
     };
     const validatePhone = (element) => {
         element.value = element.value.replace(/[^\d\(\)\-]/g,'');
