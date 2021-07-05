@@ -69,7 +69,7 @@ const slider = () => {
         if(event.target.matches('.portfolio-btn, .dot')) startSlide();
     });
 
-    startSlide(1500);
+    startSlide(2000);
 };
 
 
