@@ -15,9 +15,12 @@ const validateUserForm = () =>{
         form3 = document.getElementById('form3'),
         arrAllForms = [form1, form2, form3];
 
-    let flag = false;
-    const phoneTemplate = new RegExp('^\\+?\\d{1}[\\(\\- ]?(\\d{3})[\\)\\- ]?[\\- ]?(\\d{3})[\\- ]?(\\d{2})[\\- ]?(\\d{2})$','gm');
-    const emailTemplate = new RegExp('^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$');
+    
+    const phoneTemplate = new RegExp('^\\+?\\d{1}[\\(\\- ]?(\\d{3})[\\)\\- ]?[\\- ]?(\\d{3})[\\- ]?(\\d{2})[\\- ]?(\\d{2})$','gm'),
+        emailTemplate = new RegExp('^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$'),
+        userNameTemplate = new RegExp('^[а-яё ]{3,}$','ui'),
+        userMessageTemplate = new RegExp('^[\\?,{!\\.а-яё\\d ]+$','ui');
+
     
     const initForms = () => {
         arrAllForms.forEach(item=>{
@@ -30,6 +33,12 @@ const validateUserForm = () =>{
         const form = element.closest('form');
         return form.querySelector('.form-btn');
     };
+
+    const isFormValid = (element) => {
+        const form = element.closest('form');
+        const arrInputs = [...form.elements].filter(elem => elem.tagName.toLowerCase() === 'input')
+        return arrInputs.every(elem=>elem.hasAttribute('valid'));
+    };
     
     const disableBtnSubmit = (btn) => {
         btn.setAttribute('disabled', 'true');
@@ -39,6 +48,22 @@ const validateUserForm = () =>{
     const enableBtnSubmit = (btn) => {
         btn.removeAttribute('disabled');
         btn.style.cursor = 'pointer';
+    };
+
+    const testRegex = (template, str) => {
+        return template.test(str);
+    };
+
+    const markValidElement = (condition, element) => {
+
+        if(condition){
+            element.style.border='2px solid green';
+            element.setAttribute('valid', 'valid');
+            
+        } else {
+            element.style.border='2px solid red';
+            element.removeAttribute('valid');
+        }
     };
 
     const validateCyrillic = (element) => {
@@ -61,38 +86,6 @@ const validateUserForm = () =>{
         element.value = element.value.replace(/[ \-]$/g,'');
         if (arrUserNames.includes(element)) {
             capitalizeFirst(element);
-            if(element.value.trim().length < 3){
-                element.style.border='2px solid red';
-                flag = false;
-            } else {
-                element.style.border='2px solid green';
-                flag = true;
-            } 
-        } else if (arrUserPhones.includes(element)){
-            if(!phoneTemplate.test(element.value.trim())){
-                element.style.border='2px solid red';
-                flag = false;
-                console.log('flag: ', flag);
-
-            } else {
-                element.style.border='2px solid green';
-                flag = true;
-                console.log('flag: ', flag);
-            } 
-        } else if (arrUserEmails.includes(element)){
-            if(!emailTemplate.test(element.value.trim())){
-                element.style.border='2px solid red';
-                flag = false;
-                console.log('flag: ', flag);
-
-            } else {
-                element.style.border='2px solid green';
-                flag = true;
-                console.log('flag: ', flag);
-            } 
-        } else {
-            //техническая заглушка, т.к. есть еще и form2-message
-            flag=true;
         }
     };
 
@@ -102,23 +95,55 @@ const validateUserForm = () =>{
     };
 
     const setInputListeners = () => {
-        form2Message.addEventListener('input', event=>validateCyrillicDigitsPunctuations(event.target));
+        form2Message.addEventListener('input', event=>{
+            const target = event.target;
+            validateCyrillicDigitsPunctuations(target);
+            markValidElement(testRegex(userMessageTemplate, target.value.trim()), target);
+            if(isFormValid(target)) {
+                enableBtnSubmit(getBtnSubmit(target));
+            } else {
+                disableBtnSubmit(getBtnSubmit(target));
+            }
+
+        });
         
         arrUserEmails.forEach(item => {
-            item.addEventListener('input', event=>validateOnInputEmail(event.target));
+            item.addEventListener('input', event=>{
+                const target = event.target;
+                validateOnInputEmail(target);
+                markValidElement(testRegex(emailTemplate, target.value.trim()), target);
+                if(isFormValid(target)) {
+                    enableBtnSubmit(getBtnSubmit(target));
+                } else {
+                    disableBtnSubmit(getBtnSubmit(target));
+                }
+            });
         });
         
         arrUserPhones.forEach(item => {
             item.addEventListener('input', event=>{
-                event.target.style.border='';
-                validateOnInputPhone(event.target);
+                const target = event.target;
+                validateOnInputPhone(target);
+                markValidElement(testRegex(phoneTemplate, target.value.trim()), target);
+                if(isFormValid(target)) {
+                    enableBtnSubmit(getBtnSubmit(target));
+                } else {
+                    disableBtnSubmit(getBtnSubmit(target));
+                }
             });
         });
 
         arrUserNames.forEach(item => {
             item.addEventListener('input', event=>{
-                event.target.style.border='';
-                validateCyrillic(event.target);
+                const target = event.target;
+                //target.style.border='';
+                validateCyrillic(target);
+                markValidElement(testRegex(userNameTemplate, target.value.trim()), target);
+                if(isFormValid(target)) {
+                    enableBtnSubmit(getBtnSubmit(target));
+                } else {
+                    disableBtnSubmit(getBtnSubmit(target));
+                }
             });
         });
     };

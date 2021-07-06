@@ -1,3 +1,5 @@
+import validateUserForm from "./validateUserForm";
+
 const sendForm = () => {
     const errorMessage = 'Что-то пошло не так',
         successMessage = 'Спасибо! Мы скоро с вами свяжемся!',
@@ -20,10 +22,7 @@ const sendForm = () => {
     statusMessage.style.cssText = 'font-size: 2rem;';
     statusMessage.classList.add('preloader-block');
     
-    arrAllForms.forEach(item => {
-        item.addEventListener('submit', event => sendCurrentForm(event, item));
-    });
-    
+      
     const sendCurrentForm = (event, form) => {
         event.preventDefault();
         form.appendChild(statusMessage);
@@ -51,11 +50,7 @@ const sendForm = () => {
                     statusMessage.textContent = errorMessage;
                     console.error(errorMsg);
                 })
-                .finally(()=>{
-                    [...form.elements].forEach(item=>{
-                        if(item.tagName.toLowerCase() === 'input') item.value = '';
-                    });
-                });
+                .finally(resetForm(form));
         }
 
         
@@ -72,6 +67,19 @@ const sendForm = () => {
         return flag;
     };
     
+    const resetForm = (form) => {
+        const btn = form.querySelector('.form-btn');
+        [...form.elements].forEach(item=>{
+            if(item.tagName.toLowerCase() === 'input') {
+                item.value = '';
+                item.style.border = '';
+                
+            }
+        });
+        btn.setAttribute('disabled', 'true');
+        btn.style.cursor = 'not-allowed';
+    };
+
     const showWarnStatus = (block, text) => {
         block.innerHTML = `<font color="red">${text}</font>`;
         setTimeout(()=>{
@@ -91,7 +99,9 @@ const sendForm = () => {
        
     };
 
-    
+    arrAllForms.forEach(item => {
+        item.addEventListener('submit', event => sendCurrentForm(event, item));
+    });
 
 };
 
