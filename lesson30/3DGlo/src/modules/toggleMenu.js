@@ -9,10 +9,10 @@ const toggleMenu = () => {
 
     const handleClick = (event) => {
         let target = event.target;
-        
+        console.dir(target);
         if (target.closest('.menu')
             ||target.classList.contains('close-btn')
-            ||(target.closest('menu')&&!target.matches('menu'))
+            ||(target.closest('menu')&&!target.matches('menu')&&target.tagName!=='LI')
             ){
                 handlerMenu();
         } else{

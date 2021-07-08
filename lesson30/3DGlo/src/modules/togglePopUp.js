@@ -11,28 +11,23 @@ const togglePopUp= () => {
         popup.style.display = 'block';
         targetPopupOffsetLeft = document.documentElement.clientWidth/2 - popupContent.clientWidth/2;
         
-        popup.style.left = -popup.clientWidth+'px';
+        //popup.style.left = -popup.clientWidth+'px';
         popupContent.style.left = -popup.clientWidth + targetPopupOffsetLeft +'px';
     };
     
     
     const moveInPopup = () => {
-
         raf = requestAnimationFrame(moveInPopup);
-        
-        if (popup.offsetLeft+step < 0){
-            popupLeft = popup.offsetLeft;
+        if (popupContent.offsetLeft+step < targetPopupOffsetLeft){
             popupContentLeft = popupContent.offsetLeft;
-            popupLeft+=step;
-            popupContentLeft+=step;
-            popup.style.left = popupLeft + 'px';
-            popupContent.style.left = popupContentLeft +'px';
+            popupContentLeft += step;
+            popupContent.style.left = popupContentLeft + 'px';
             
         }
-        else if(popup.offsetLeft+step>0&&popup.offsetLeft+step<step){
+        else if(popupContent.offsetLeft+step > targetPopupOffsetLeft && popupContent.offsetLeft+step > 0){
             step /=2;
         }
-        else if(popup.offsetLeft===0){
+        if(step < 1){
             cancelAnimationFrame(raf);
         }
         
