@@ -1,1 +1,0 @@
-let appData = 'hello world';
