@@ -1,0 +1,1 @@
+(()=>{"use strict";[document.querySelector('[href="#services"]'),document.querySelector('[href="#faq"]'),document.querySelector('[href="#contacts"]')].forEach((function(e){var t=e.getAttribute("href").slice(1),o=document.getElementById("".concat(t));e.addEventListener("click",(function(e){e.preventDefault(),window.scrollTo({top:o.offsetTop,behavior:"smooth"})}))}))})();
