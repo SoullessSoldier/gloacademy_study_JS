@@ -10,6 +10,7 @@ body {
 	color: #333333;
 	overflow-x: hidden;
 	font-family: "Open Sans", sans-serif;
+	scroll-behavior: smooth;
 }
 .main-wrapper {
 	min-height: 100%;
