@@ -1,5 +1,6 @@
 const path = require('path');
 module.exports = {
+    
     entry: './src/index.js',
     output: {
         filename: 'bundle.js',
@@ -19,5 +20,6 @@ module.exports = {
                 exclude: /node_modules/,
             }
         ]
-    }
+    },
+    
 };

@@ -1234,3 +1234,9 @@ video#video_background {
 	}
 }
 /**** /. services section *****/
+.js-show{
+	display:block;
+}
+.js-hide{
+	display:none;
+}

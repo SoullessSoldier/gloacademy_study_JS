@@ -1,22 +1,24 @@
 const smoothScrollToAnchor = () => {
     
-    const anchorLinkService = document.querySelector('[href="#services"]');
-    const anchorLinkFaq = document.querySelector('[href="#faq"]');
-    const anchorLinkContacts = document.querySelector('[href="#contacts"]');
-    const arrAnchorLinks = [anchorLinkService,  anchorLinkFaq, anchorLinkContacts];
+    const anchorLinkItems = document.querySelectorAll('.anchor-link-item');
     
-    arrAnchorLinks.forEach(item => {
-        let atrribute = item.getAttribute('href').slice(1,);
-        let elementScrollTo = document.getElementById(`${atrribute}`);
+    const smoothScroll = (event) => {
+        event.preventDefault();
+        const target = event.target;
         
-        item.addEventListener('click', (e) => {
-            e.preventDefault();
-            window.scrollTo({
-                top: elementScrollTo.offsetTop,
-                behavior: "smooth"
-            });
+        let atrribute = target.getAttribute('href').slice(1,);
+        let elementScrollTo = document.getElementById(`${atrribute}`);
+            
+        window.scrollTo({
+            top: elementScrollTo.offsetTop,
+            behavior: "smooth"
         });
-    });
+        
+    };
+
+    anchorLinkItems.forEach(item => {
+        item.addEventListener('click', smoothScroll);
+    })
 };
 
 export default smoothScrollToAnchor;
