@@ -1,9 +1,10 @@
 const toggleModalCallback = () => {
     const modalOverlay = document.querySelector('.modal-overlay'),
         modalClose = document.querySelector('.modal-close'),
-        callbackBtnItems = document.querySelectorAll('.callback-btn'),
-        modalCallback = document.querySelector('.modal-callback'),
-        arrControls = Array.of(modalOverlay, modalClose);
+        callbackBtnItems = document.querySelectorAll('.js-callback-btn'),
+        modalCallback = document.querySelector('.modal-callback');
+    
+    const arrControls = Array.of(modalOverlay, modalClose);
         
     
 
@@ -37,6 +38,8 @@ const toggleModalCallback = () => {
             hideModal();
         });
     })
+    
+    
     
 };
 
