@@ -7,6 +7,7 @@ import topSlider from './modules/topSlider';
 import servicesCarousel from './modules/servicesCarousel';
 import showScrollUp from './modules/showScrollUp';
 import sendCallbackForm from './modules/sendCallbackForm';
+import validateUserInput from './modules/validateUserInput';
 
 smoothScrollToAnchor();
 toggleModalCallback();
@@ -15,3 +16,4 @@ topSlider();
 servicesCarousel();
 showScrollUp();
 sendCallbackForm();
+validateUserInput();

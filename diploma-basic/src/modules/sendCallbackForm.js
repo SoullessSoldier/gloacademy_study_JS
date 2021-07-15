@@ -11,14 +11,19 @@ const sendCallbackForm = () => {
         </div>
       </section>`;
 
-    const form = document.getElementById('form-callback');
+    const form = document.getElementById('form-callback'),
+        btn = form.querySelector('.form-btn');;
 
     const statusMessage = document.createElement('div');
     //statusMessage.textContent = 'Тут сообщение!';
     statusMessage.style.cssText = 'font-size: 2rem;';
     statusMessage.classList.add('preloader-block');
     
-      
+    const enableBtnSubmit = (btn) => {
+        btn.removeAttribute('disabled');
+        btn.style.cursor = 'pointer';
+    };
+    
     const sendCurrentForm = (event, form) => {
         event.preventDefault();
         form.appendChild(statusMessage);
@@ -62,16 +67,14 @@ const sendCallbackForm = () => {
     };
     
     const resetForm = (form) => {
-        const btn = form.querySelector('.form-btn');
-        [...form.elements].forEach(item=>{
-            if(item.tagName.toLowerCase() === 'input') {
+        
+        [...form.elements].forEach(item => {
+            if(item.tagName.toLowerCase() === 'input' && !item.matches('.form-btn')) {
                 item.value = '';
-                item.style.border = '';
                 
             }
         });
-        //btn.setAttribute('disabled', 'true');
-        btn.style.cursor = 'not-allowed';
+        enableBtnSubmit(btn);
     };
 
     const showWarnStatus = (block, text) => {
