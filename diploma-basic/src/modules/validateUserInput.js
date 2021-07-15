@@ -5,7 +5,7 @@ const validateUserInput = () => {
 
     
     const validateCyrillic = (element) => {
-        element.value = element.value.replace(/[^а-яё ]/gi,'');
+        element.value = element.value.replace(/[^а-яё]/gi,'');
     };
 
     const validateOnInputPhone = (element) => {

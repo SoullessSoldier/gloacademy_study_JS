@@ -12,7 +12,7 @@ const sendCallbackForm = () => {
       </section>`;
 
     const form = document.getElementById('form-callback'),
-        btn = form.querySelector('.form-btn');;
+        btn = form.querySelector('.form-btn');
 
     const statusMessage = document.createElement('div');
     //statusMessage.textContent = 'Тут сообщение!';
@@ -22,6 +22,11 @@ const sendCallbackForm = () => {
     const enableBtnSubmit = (btn) => {
         btn.removeAttribute('disabled');
         btn.style.cursor = 'pointer';
+    };
+
+    const disableBtnSubmit = (btn) => {
+        btn.setAttribute('disabled', 'disabled');
+        btn.style.cursor = 'not-allowed';
     };
     
     const sendCurrentForm = (event, form) => {
@@ -47,9 +52,14 @@ const sendCallbackForm = () => {
                 })
                 .catch(errorMsg => {
                     statusMessage.textContent = errorMessage;
-                    console.error(errorMsg);
+                    //console.error(errorMsg);
                 })
-                .finally(resetForm(form));
+                .finally(()=>{
+                    disableBtnSubmit(btn);
+                    setTimeout(()=>{
+                        resetForm(form)
+                    }, 2000);
+                });
         }
 
         
@@ -74,6 +84,7 @@ const sendCallbackForm = () => {
                 
             }
         });
+        statusMessage.textContent = '';
         enableBtnSubmit(btn);
     };
 
