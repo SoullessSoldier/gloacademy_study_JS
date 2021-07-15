@@ -5,7 +5,7 @@ const servicesCarousel = () => {
         servicesSection = document.querySelector('.services-section'),
         servicesArrowBlock = servicesSection.querySelector('.services-arrow');
 
-    const items = Array.of(carouselItems);
+    const carouselLength = carouselItems.length;
     
 
     let currentPosition = 0; 
@@ -17,44 +17,37 @@ const servicesCarousel = () => {
         if(currentPosition <0) currentPosition = carouselItems.length-1;
     };
 
-    const prevSlide = (elem, index) => {
-        elem[index].classList.remove('js-show');
-        elem[index].classList.add('js-hide');
-    };
-    
-    const nextSlide = (elem, index) => {
-        elem[index].classList.remove('js-hide');
-        elem[index].classList.add('js-show');
-    };
-
     const init = () => {
         servicesCarousel.textContent = '';
         
     };
 
     const renderCarousel = (direction) => {
+        
         if (!direction) {
             for(let i = 0; i < 3; i++){
                 servicesCarousel.append(carouselItems[i]);
             }
         } else {
             if (direction === 'right') {
-               console.log(items);
+               //console.log(items);
                 
-                let a = currentPosition + 2 > items[0].length?  1:
-                    currentPosition + 1 > items[0].length ? 2: 
+                let a = (currentPosition + 2 === carouselItems.length) ?  0 :
+                    (currentPosition + 1 === carouselItems.length) ? 1 : 
                     currentPosition + 2;
-                checkCurrentPosition();
-                console.log(currentPosition, a);
-                //console.log('carouselItems[currentPosition]: ', carouselItems[currentPosition]);
-                    
-                //servicesCarousel.removeChild(servicesCarousel.firstChild);
-                //servicesCarousel.insertAdjacentElement('beforeend', items[0][a]);
+                        
+                servicesCarousel.removeChild(servicesCarousel.firstChild);
+                servicesCarousel.append(carouselItems[a]);
                 
                 
 
             } else if (direction === 'left') {
-
+                let a = currentPosition   === 0 ?  carouselLength - 1 :
+                    currentPosition  === 1  ?  0 : 
+                    currentPosition - 1;
+                
+                servicesCarousel.removeChild(servicesCarousel.lastChild);
+                servicesCarousel.prepend(carouselItems[a]);
             }
         }
     };
@@ -66,16 +59,17 @@ const servicesCarousel = () => {
         
         if(target.matches('.arrow-right')){
             currentPosition++;
+            checkCurrentPosition();
             renderCarousel("right");
                            
         }else if(target.matches('.arrow-left')){
+            renderCarousel("left");
             currentPosition--;
+            checkCurrentPosition();
+            
                             
         } 
 
-        
-
-        //renderCarousel();
         
 
     });
