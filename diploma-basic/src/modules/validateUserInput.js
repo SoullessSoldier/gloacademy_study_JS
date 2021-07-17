@@ -65,6 +65,7 @@ const validateUserInput = () => {
     };
 
     const validateOnBlur = (element) => {
+        element.value = element.value.trim();
         capitalizeFirst(element);
     };
 
