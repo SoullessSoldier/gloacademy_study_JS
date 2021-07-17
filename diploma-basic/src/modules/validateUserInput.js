@@ -61,7 +61,7 @@ const validateUserInput = () => {
     };
 
     const validateOnInputPhone = (element) => {
-        element.value = element.value.replace(/[^\+\d]/g,'');
+        element.value = element.value.replace(/[^\+\d\(\)\-]/g,'');
     };
 
     const validateOnBlur = (element) => {
