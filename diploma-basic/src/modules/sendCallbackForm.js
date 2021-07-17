@@ -24,10 +24,6 @@ const sendCallbackForm = () => {
         btn.style.cursor = 'pointer';
     };
 
-    const disableBtnSubmit = (btn) => {
-        btn.setAttribute('disabled', 'disabled');
-        btn.style.cursor = 'not-allowed';
-    };
     
     const sendCurrentForm = (event, form) => {
         event.preventDefault();
@@ -55,7 +51,7 @@ const sendCallbackForm = () => {
                     //console.error(errorMsg);
                 })
                 .finally(()=>{
-                    disableBtnSubmit(btn);
+                    //disableBtnSubmit(btn);
                     setTimeout(()=>{
                         resetForm(form)
                     }, 2000);
@@ -81,7 +77,7 @@ const sendCallbackForm = () => {
         [...form.elements].forEach(item => {
             if(item.tagName.toLowerCase() === 'input' && !item.matches('.form-btn')) {
                 item.value = '';
-                
+                item.style.border = '';
             }
         });
         statusMessage.textContent = '';
