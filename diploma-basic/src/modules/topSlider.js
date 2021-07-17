@@ -12,6 +12,7 @@ const topSlider = (duration = 3000) => {
         } else {
             elem[index].classList.remove('js-show');
             elem[index].classList.add('js-hide');
+            elem[index].querySelector('.table').classList.remove('active');
         }
     };
 
@@ -21,6 +22,7 @@ const topSlider = (duration = 3000) => {
         } else {
             elem[index].classList.remove('js-hide');
             elem[index].classList.add('js-show');
+            elem[index].querySelector('.table').classList.add('active');
         }
     };
 
